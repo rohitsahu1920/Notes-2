@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Notes</string>
+
+    <string name="loading">Loading</string>
+    <string name="home">Home</string>
+    <string name="stats">Statistics</string>
+    <string name="setting">Settings</string>
+    <string name="sync">Sync</string>
+    <string name="share">Share</string>
+    <string name="about">About me</string>
+    <string name="report">Report Bug</string>
+    <string name="delete">Delete</string>
+
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="save">Save</string>
+    <string name="ver">1.0</string>
 </resources>
