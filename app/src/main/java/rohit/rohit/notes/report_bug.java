@@ -1,14 +1,14 @@
-package sahu.rohit.notes;
+package rohit.rohit.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class statistics extends AppCompatActivity {
+public class report_bug extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statistics);
+        setContentView(R.layout.activity_report_bug);
     }
 }

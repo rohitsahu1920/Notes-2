@@ -1,4 +1,4 @@
-package sahu.rohit.notes;
+package rohit.rohit.notes;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -7,20 +7,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
-        super(context, "notes.db", null, 1);
+        super(context, "notes2.db", null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table notes(title text primary key,body text, image BLOB)");
+        db.execSQL("Create table notes(title text, body text, image BLOB)");
     }
 
     @Override
@@ -65,5 +63,33 @@ public class DbHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext());
         }
         return notes_model_List;
+    }
+
+    boolean delete_all()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long delete = db.delete("notes", null,null);
+        if(delete == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public boolean delete(String title, String body)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long delete = db.delete("notes", "title = ? and body = ?",new String[]{title,body});
+        if(delete == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

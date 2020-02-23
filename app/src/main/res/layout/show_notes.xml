@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".body_of_notes">
+    tools:context=".notes_show">
 
     <include layout="@layout/toolbar"/>
 
@@ -53,13 +52,13 @@
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/title"
-            android:gravity="center"
-            android:hint="@string/title"
-            android:textSize="22sp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:gravity="center"
+                android:hint="@string/title"
+                android:textSize="22sp" />
 
             <ScrollView
                 android:layout_width="match_parent"

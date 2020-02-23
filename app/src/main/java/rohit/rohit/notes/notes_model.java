@@ -1,4 +1,6 @@
-package sahu.rohit.notes;
+package rohit.rohit.notes;
+
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
@@ -36,5 +38,12 @@ public class notes_model implements Serializable {
 
     public byte[] getImage() {
         return image;
+    }
+
+    @NonNull
+    @Override
+    public String toString()
+    {
+        return getTitle();
     }
 }

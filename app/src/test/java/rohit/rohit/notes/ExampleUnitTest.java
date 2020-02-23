@@ -1,4 +1,4 @@
-package sahu.rohit.notes;
+package rohit.rohit.notes;
 
 import org.junit.Test;
 

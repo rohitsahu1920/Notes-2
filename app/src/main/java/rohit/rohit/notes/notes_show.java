@@ -1,10 +1,4 @@
-package sahu.rohit.notes;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+package rohit.rohit.notes;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,17 +9,28 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
-public class body_of_notes extends AppCompatActivity {
+public class notes_show extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMAGE_ID = 1;
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -34,14 +39,17 @@ public class body_of_notes extends AppCompatActivity {
     Toolbar toolbar;
     Button save;
     ImageView image;
-    byte[] image1;
-    String image_path;
     DbHelper dbHelper;
+    int image_len;
+    String image_path;
+    Bitmap image2;
+    byte[] image1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_body_of_notes);
+        setContentView(R.layout.show_notes);
 
         body = findViewById(R.id.body);
         title = findViewById(R.id.title);
@@ -51,6 +59,11 @@ public class body_of_notes extends AppCompatActivity {
         save = findViewById(R.id.save);
         image = findViewById(R.id.image);
         dbHelper = new DbHelper(this);
+
+        setdata();
+
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +79,7 @@ public class body_of_notes extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Hurry Data Saved.....:)",Toast.LENGTH_LONG).show();
                     }
                 }
-                else 
+                else
                 {
                     Toast.makeText(getApplicationContext(),"Title and Body Can not be empty",Toast.LENGTH_LONG).show();
                 }
@@ -78,7 +91,7 @@ public class body_of_notes extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkPermission())
                 {
-                    Intent id_button = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent id_button = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(id_button,RESULT_LOAD_IMAGE_ID);
                 }
                 else
@@ -142,5 +155,36 @@ public class body_of_notes extends AppCompatActivity {
         {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.notes_list_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                startActivity(new Intent(getApplicationContext(),notes_list.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void setdata() {
+        notes_model Notes_model = (notes_model) getIntent().getExtras().getSerializable("notes");
+        title.setText(Notes_model.getTitle());
+        body.setText(Notes_model.getBody());
+        image_len = Notes_model.getImage().length;
+        image1 = Notes_model.getImage();
+        image2 = BitmapFactory.decodeByteArray(image1, 0, image_len);
+        image.setImageBitmap(image2);
     }
 }

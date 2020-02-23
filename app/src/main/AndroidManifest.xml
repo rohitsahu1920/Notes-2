@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sahu.rohit.notes">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="rohit.rohit.notes">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -8,15 +13,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".app_info"></activity>
-        <activity android:name=".about_me" />
-        <activity android:name=".report_bug" />
-        <activity android:name=".setting" />
-        <activity android:name=".statistics" />
-        <activity android:name=".body_of_notes" />
-        <activity android:name=".notes_list" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="rohit.rohit.notes.notes_show"></activity>
+        <activity android:name="rohit.rohit.notes.app_info" />
+        <activity android:name="rohit.rohit.notes.about_me" />
+        <activity android:name="rohit.rohit.notes.report_bug" />
+        <activity android:name="rohit.rohit.notes.setting" />
+        <activity android:name="rohit.rohit.notes.statistics" />
+        <activity android:name="rohit.rohit.notes.body_of_notes" />
+        <activity android:name="rohit.rohit.notes.notes_list" />
+        <activity android:name="rohit.rohit.notes.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
